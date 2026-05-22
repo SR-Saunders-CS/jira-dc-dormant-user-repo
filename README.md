@@ -1,4 +1,3 @@
-
 # 🔍 Dormant User Report — Jira Data Center
 
 > ## ⚠️ PROOF OF CONCEPT
@@ -6,7 +5,6 @@
 > It comes with no warranty, no support SLA, and no guarantee it will work on your specific instance.
 > **Test every updated script thoroughly before using it in production.**
 > If you have questions regarding how to migrate from DC to Cloud, speak to a ScriptRunner [Customer Success Manager](https://www.scriptrunnerhq.com/locker/customer-success-team).
-
 
 A ScriptRunner script that identifies inactive users on your Jira Data Center instance, helping you decide who still needs a licence and who doesn't.
 
@@ -47,7 +45,7 @@ The report renders directly inside the ScriptRunner Script Console as a formatte
 
 **1. Copy the script**
 
-Copy the contents of [`dormant-user-report.groovy`](dormant-user-report.groovy).
+Copy the contents of [`dormant-user-report-console.groovy`](https://github.com/SR-Saunders-CS/jira-dc-dormant-user-repo/blob/main/scripts/dormant-user-report-console.groovy).
 
 **2. Open the Script Console**
 
@@ -189,7 +187,7 @@ On a small instance (under 1,000 users) it typically completes in a few seconds.
 Yes. The script reads from Jira's internal login tracking, which records logins regardless of which directory the user belongs to. LDAP users will appear in the report with a red directory badge.
 
 **Can I run this on a schedule?**
-Not in its current form — it is designed for the Script Console. If you need it to run automatically on a schedule, it can be adapted into a ScriptRunner Job. Raise an issue or get in touch.
+Yes — see the [Scheduled Job](#scheduled-job-email-report) section below.
 
 **The report shows my admin account as dormant — is that right?**
 If your admin account hasn't logged in within the cutoff period, yes it will appear. You can safely ignore it or exclude it by removing it from the licenced groups you are scanning.
@@ -214,11 +212,9 @@ If your admin account hasn't logged in within the cutoff period, yes it will app
 
 ---
 
----
-
 ## Scheduled Job (Email Report)
 
-If you want the report to run automatically on a schedule and email the results, use [`dormant-user-report-job.groovy`](dormant-user-report-job.groovy) instead.
+If you want the report to run automatically on a schedule and email the results, use [`dormant-user-report-job.groovy`](https://github.com/SR-Saunders-CS/jira-dc-dormant-user-repo/blob/main/scripts/dormant-user-report-job.groovy) instead.
 
 The job sends a fully formatted HTML email to one or more recipients and only sends if dormant users are actually found — no empty emails.
 
@@ -254,7 +250,7 @@ Jira Administration → ScriptRunner → Jobs → Create Job → Custom Schedule
 | **Name** | `Dormant User Report` |
 | **User** | An admin user the job runs as — ideally a dedicated automation account |
 | **Interval / Cron** | See cron examples below |
-| **Inline Script** | Paste the contents of `dormant-user-report-job.groovy` |
+| **Inline Script** | Paste the contents of [`dormant-user-report-job.groovy`](https://github.com/SR-Saunders-CS/jira-dc-dormant-user-repo/blob/main/scripts/dormant-user-report-job.groovy) |
 
 **3. Click Add to save**
 
@@ -287,7 +283,12 @@ If outgoing mail is not configured, the job will run but no email will be sent.
 
 ---
 
+## Contributing
 
+Issues and pull requests are welcome. Please open an issue first to discuss any significant changes.
 
+---
 
+## Licence
 
+MIT — free to use, modify, and distribute.
